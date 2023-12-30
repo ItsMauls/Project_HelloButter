@@ -10,12 +10,13 @@ import { useContext, useEffect, useState } from "react"
 import InfiniteScroll from 'react-infinite-scroll-component'
 
 
-    const Products = async():Promise<Product[]> => {
-        const response = await fetch(`https://mauproject-hellobutter.vercel.app/api/products`)        
-        return response.json()     
-    }
 
-    export default function GetAllProducts () {
+const Products = async():Promise<Product[]> => {
+    const response = await fetch(`${process.env.BASE_URL}/api/products`)        
+    return response.json()     
+}
+
+export default function GetAllProducts () {
         const {isVisible} = useContext(ToggleContext)
         const [products, setProducts] = useState<Product[]>([])
         const [isLoading, setIsLoading] = useState(false)

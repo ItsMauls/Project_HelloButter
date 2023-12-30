@@ -11,7 +11,7 @@ const createUser = async(
     username? : string,
     password? : string
     ) => {
-    const response = await fetch('https://hallobutter-next-maulana-ibrahim-adiputras-projects.vercel.app/api/auth/register', {
+    const response = await fetch('https://mauproject-hellobutter.vercel.app/api/auth/register', {
         method : 'POST',
         headers : {
             'Content-Type' : 'application/json'
