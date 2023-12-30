@@ -3,7 +3,7 @@ import { priceFormat } from "../helpers/priceFormat"
 import Product from "@/db/models/products"
 
 const getFeaturedProducts = async():Promise<Product[]> => {
-    const response = await fetch('https://hallobutter-next-maulana-ibrahim-adiputras-projects.vercel.app/api/featured_products')
+    const response = await fetch('https://mauproject-hellobutter.vercel.app/api/featured_products')
     return response.json()
     }
     

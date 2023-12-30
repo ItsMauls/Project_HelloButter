@@ -10,10 +10,9 @@ import { useContext, useEffect, useState } from "react"
 import InfiniteScroll from 'react-infinite-scroll-component'
 
 
-    const Products = async(start = 0, limit = 10):Promise<Product[]> => {
-        const response = await fetch(`https://mauproject-hellobutter.vercel.app/api/products?start=${start}&limit=${limit}`)
-        return response.json()
-        
+    const Products = async():Promise<Product[]> => {
+        const response = await fetch(`https://mauproject-hellobutter.vercel.app/api/products`)        
+        return response.json()     
     }
 
     export default function GetAllProducts () {
@@ -35,7 +34,7 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 
         const fetchMoreData = async () => {
             // Ambil data dari server
-            const newProducts = await Products(products.length, 10);
+            const newProducts = await Products();
             setProducts([...products, ...newProducts]);
             
             // Jika jumlah produk baru kurang dari limit, maka tidak ada lagi data

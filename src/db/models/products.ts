@@ -35,7 +35,7 @@ export const getFeaturedProducts = async() => {
 
 export const getProducts = async(req: NextRequest) => {
     try {
-        const url = new URL(req.url)
+        // const url = new URL(req.url)
         
         // const startParam = url.searchParams.get('start')
         // const limitParam = url.searchParams.get('limit')
