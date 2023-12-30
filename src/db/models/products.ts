@@ -37,19 +37,19 @@ export const getProducts = async(req: NextRequest) => {
     try {
         const url = new URL(req.url)
         
-        const startParam = url.searchParams.get('start')
-        const limitParam = url.searchParams.get('limit')
+        // const startParam = url.searchParams.get('start')
+        // const limitParam = url.searchParams.get('limit')
 
-        const start = startParam ? parseInt(startParam, 10) : 0;
-        const limit = limitParam ? parseInt(limitParam, 10) : 10;
+        // const start = startParam ? parseInt(startParam, 10) : 0;
+        // const limit = limitParam ? parseInt(limitParam, 10) : 10;
 
         const db = await connectToDatabase()
         const Products : Collection<Document> = db.collection('Products')
         const response = await Products
         .find()
         .sort({createdAt : -1})
-        .skip(start)
-        .limit(limit)
+        .skip(0)
+        .limit(10)
         .toArray()
 
         return response
