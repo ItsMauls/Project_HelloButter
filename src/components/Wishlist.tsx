@@ -5,7 +5,7 @@ import Product from "@/db/models/products"
 
 
 const getWishlist = async() => {
-  const response = await fetch('http://localhost:3000/api/wishlist')
+  const response = await fetch('https://mauproject-hellobutter.vercel.app/api/wishlist')
   
   return response.json()
 }
@@ -22,7 +22,7 @@ const Wishlist = () => {
 
   const deleteWishlist = async(productId : string) => {
     
-    const response = await fetch(`http://localhost:3000/api/wishlist/${productId}`, {
+    const response = await fetch(`https://mauproject-hellobutter.vercel.app/api/wishlist/${productId}`, {
       method : 'DELETE'
     })
     

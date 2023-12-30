@@ -10,7 +10,7 @@ import { ResolvingMetadata } from "next"
     };
 
 const getProductBySlug = async(slug : string):Promise<Product> => {
-    const BASE_URL =  'http://localhost:3000'
+    const BASE_URL =  'https://mauproject-hellobutter.vercel.app'
     const response = await fetch(`${BASE_URL}/api/products/${slug}`)
     return await response.json()
 }

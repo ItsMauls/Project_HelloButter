@@ -11,7 +11,7 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 
 
     const Products = async(start = 0, limit = 10):Promise<Product[]> => {
-        const response = await fetch(`http://localhost:3000/api/products?start=${start}&limit=${limit}`)
+        const response = await fetch(`https://mauproject-hellobutter.vercel.app/api/products?start=${start}&limit=${limit}`)
         return response.json()
         
     }

@@ -6,7 +6,7 @@ import { MouseEvent } from "react";
 const wishlistHandler = async(e : MouseEvent<HTMLButtonElement>, productId : ObjectId, ) => {
     e.stopPropagation()
     
-    const response = await fetch(`http://localhost:3000/api/wishlist/add/${productId}`, {
+    const response = await fetch(`https://mauproject-hellobutter.vercel.app/api/wishlist/add/${productId}`, {
         method : 'POST'
     })
     

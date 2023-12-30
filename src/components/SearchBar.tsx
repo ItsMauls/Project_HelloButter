@@ -2,7 +2,7 @@ import Product from "@/db/models/products";
 import { ChangeEvent } from "react"
 
 const searchProducts = async(searchInput : string) => {
-    const response = await fetch(`http://localhost:3000/api/search?input=${searchInput}`)
+    const response = await fetch(`https://mauproject-hellobutter.vercel.app/api/search?input=${searchInput}`)
     return response.json()
 }
 interface SearchBarProps {
