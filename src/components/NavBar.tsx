@@ -26,10 +26,10 @@ const NavBar = ({toggleSearch} : any) => {
   <div className="container flex flex-wrap justify-between items-center mx-auto">
     <Link href="/" className="flex items-center">
         <Image 
-          height={60}
+          height={50}
           width={60}  
           src="/img/logo.png" 
-          className="mr-3 h-6 sm:h-14" 
+          className="mr-3 h-12 sm:h-14" 
           alt="Logo"/>
         <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-pink-500">Hallo Butter</span>
     </Link>

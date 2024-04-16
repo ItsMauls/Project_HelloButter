@@ -2,7 +2,7 @@
 import { BASE_URL } from "@/constants";
 import { ObjectId } from "mongodb";
 import { MouseEvent } from "react";
-
+import { CiHeart } from "react-icons/ci";
 
 const wishlistHandler = async(e : MouseEvent<HTMLButtonElement>, productId : ObjectId, ) => {
     e.stopPropagation()
@@ -15,11 +15,11 @@ const wishlistHandler = async(e : MouseEvent<HTMLButtonElement>, productId : Obj
     
 }
 
-const AddToWishlistButton = ({productId} : {productId : ObjectId }) => {
+const AddToWishlistButton = ({productId, text, ...props} : {productId : ObjectId, className : string, text?: string }) => {
 
     return (
         <>
-        <button className="cursor-pointer bg-pink-500 px-2 py-2 rounded-lg" onClick={(e) => wishlistHandler(e,productId)}>Add to Wishlist</button>
+        <button {...props} onClick={(e) => wishlistHandler(e,productId)}><CiHeart/><span className="block">{text}</span></button>
         </>
     )
 }
