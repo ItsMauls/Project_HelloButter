@@ -1,4 +1,4 @@
-'use server'
+
 import DetailCard from "@/components/DetailCard"
 import DetailProductSkeleton from "@/components/DetailProductSkeleton"
 import { BASE_URL } from "@/constants"
