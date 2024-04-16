@@ -1,11 +1,13 @@
+import Image from "next/image"
+
 const PromoBanner = () => {
     
     return (
         <>
            <div className="">
         <div className="grid grid-cols-3 gap-x-8 mt-4 w-5/6 mx-auto">
-            <img className="rounded-xl" src="https://milkbarstore.com/cdn/shop/files/HomepageLeft_2.jpg?format=pjpg&v=1700526255&width=720" alt=""/>
-            <img className="rounded-xl" src="https://milkbarstore.com/cdn/shop/files/HomepageLeft_2.jpg?format=pjpg&v=1700526255&width=720" alt=""/>
+            <Image width={500} height={500} className="rounded-xl" src="https://milkbarstore.com/cdn/shop/files/HomepageLeft_2.jpg?format=pjpg&v=1700526255&width=720" alt=""/>
+            <Image width={500} height={500} className="rounded-xl" src="https://milkbarstore.com/cdn/shop/files/HomepageLeft_2.jpg?format=pjpg&v=1700526255&width=720" alt=""/>
             <div id="promo" className="mx-auto text-center row-span-1 mt-24">
                 <h1 className="text-2xl">
                     Nikmati Promo Hari Ini!

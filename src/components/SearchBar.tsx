@@ -1,8 +1,9 @@
+import { BASE_URL } from "@/constants";
 import Product from "@/db/models/products";
 import { ChangeEvent } from "react"
 
 const searchProducts = async(searchInput : string) => {
-    const response = await fetch(`https://mauproject-hellobutter.vercel.app/api/search?input=${searchInput}`)
+    const response = await fetch(`${BASE_URL}/search?input=${searchInput}`)
     return response.json()
 }
 interface SearchBarProps {

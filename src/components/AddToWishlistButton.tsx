@@ -1,4 +1,5 @@
 
+import { BASE_URL } from "@/constants";
 import { ObjectId } from "mongodb";
 import { MouseEvent } from "react";
 
@@ -6,7 +7,7 @@ import { MouseEvent } from "react";
 const wishlistHandler = async(e : MouseEvent<HTMLButtonElement>, productId : ObjectId, ) => {
     e.stopPropagation()
     
-    const response = await fetch(`https://mauproject-hellobutter.vercel.app/api/wishlist/add/${productId}`, {
+    const response = await fetch(`${BASE_URL}/wishlist/add/${productId}`, {
         method : 'POST'
     })
     

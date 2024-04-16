@@ -1,6 +1,7 @@
 'use server'
 import DetailCard from "@/components/DetailCard"
 import DetailProductSkeleton from "@/components/DetailProductSkeleton"
+import { BASE_URL } from "@/constants"
 
 import Product from "@/db/models/products"
 import { ResolvingMetadata } from "next"    
@@ -10,8 +11,7 @@ import { ResolvingMetadata } from "next"
     };
 
 const getProductBySlug = async(slug : string):Promise<Product> => {
-    const BASE_URL =  'https://mauproject-hellobutter.vercel.app'
-    const response = await fetch(`${BASE_URL}/api/products/${slug}`)
+    const response = await fetch(`${BASE_URL}/products/${slug}`)
     return await response.json()
 }
 

@@ -1,5 +1,6 @@
 'use client'
 import { signOut, useSession } from "next-auth/react"
+import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { ReactNode } from "react"
@@ -24,14 +25,19 @@ const NavBar = ({toggleSearch} : any) => {
         <nav className=" border-b-2  border-gray-200 px-2 sm:px-4 py-2.5">
   <div className="container flex flex-wrap justify-between items-center mx-auto">
     <Link href="/" className="flex items-center">
-        <img src="/img/logo.png" className="mr-3 h-6 sm:h-14" alt="Logo"/>
+        <Image 
+          height={60}
+          width={60}  
+          src="/img/logo.png" 
+          className="mr-3 h-6 sm:h-14" 
+          alt="Logo"/>
         <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-pink-500">Hallo Butter</span>
     </Link>
     <div className="flex md:order-2">
-        {isLoggedIn && <Link href={'/wishlist'}><img src="/img/wishlist.png" className="w-10" alt="" /></Link>}
-        {!isLoggedIn && <Link href={'/login'}><img src="/img/account.png" className="w-10 mx-3" alt="" /></Link>}
-        {inProductsPage && <button onClick={toggleSearch}><img src="/img/search.png" className="w-10" alt="" /></button>}
-        {isLoggedIn && <img src="/img/logout.png" onClick={logoutHandler} className="w-10 mx-3" alt="" />}
+        {isLoggedIn && <Link href={'/wishlist'}><Image width={500} height={500} src="/img/wishlist.png" className="w-10" alt="" /></Link>}
+        {!isLoggedIn && <Link href={'/login'}><Image width={500} height={500} src="/img/account.png" className="w-10 mx-3" alt="" /></Link>}
+        {inProductsPage && <button onClick={toggleSearch}><Image width={500} height={500} src="/img/search.png" className="w-10" alt="" /></button>}
+        {isLoggedIn && <Image width={500} height={500} src="/img/logout.png" onClick={logoutHandler} className="w-10 mx-3" alt="" />}
         
         <button data-collapse-toggle="mobile-menu-2" type="button" className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-2" aria-expanded="false">
             <span className="sr-only">Open main menu</span>

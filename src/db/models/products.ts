@@ -34,22 +34,22 @@ export const getFeaturedProducts = async() => {
 }
 
 export const getProducts = async(req: NextRequest) => {
+    const searchParams = req.nextUrl.searchParams
     try {
-        // const url = new URL(req.url)
         
-        // const startParam = url.searchParams.get('start')
-        // const limitParam = url.searchParams.get('limit')
+        const startParam = searchParams.get('start')
+        const limitParam = searchParams.get('limit')
 
-        // const start = startParam ? parseInt(startParam, 10) : 0;
-        // const limit = limitParam ? parseInt(limitParam, 10) : 10;
+        const start = startParam ? parseInt(startParam, 10) : 0;
+        const limit = limitParam ? parseInt(limitParam, 10) : 10;
 
         const db = await connectToDatabase()
         const Products : Collection<Document> = db.collection('Products')
         const response = await Products
         .find()
         .sort({createdAt : -1})
-        .skip(0)
-        .limit(10)
+        .skip(start)
+        .limit(limit)
         .toArray()
 
         return response
@@ -82,8 +82,9 @@ export const getProductBySlug = async(req: NextRequest) => {
 }
 
 export const searchedProducts = async(req: NextRequest) => {
+    const searchParams = req.nextUrl.searchParams
     try {
-        const searchParam = req.nextUrl.searchParams.get('input');
+        const searchParam = searchParams.get('input');
         
         if (!searchParam) {
             return new NextResponse(JSON.stringify({ message: "Search query is required" }), { status: 400 });

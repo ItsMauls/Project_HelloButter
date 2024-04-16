@@ -2,10 +2,12 @@ import { useEffect, useState } from "react"
 import { priceFormat } from "../helpers/priceFormat"
 import { ObjectId } from "mongodb"
 import Product from "@/db/models/products"
+import { BASE_URL } from "@/constants"
+import Image from "next/image"
 
 
 const getWishlist = async() => {
-  const response = await fetch('https://mauproject-hellobutter.vercel.app/api/wishlist')
+  const response = await fetch(`${BASE_URL}/wishlist`)
   
   return response.json()
 }
@@ -22,7 +24,7 @@ const Wishlist = () => {
 
   const deleteWishlist = async(productId : string) => {
     
-    const response = await fetch(`https://mauproject-hellobutter.vercel.app/api/wishlist/${productId}`, {
+    const response = await fetch(`${BASE_URL}/wishlist/${productId}`, {
       method : 'DELETE'
     })
     
@@ -52,7 +54,12 @@ const Wishlist = () => {
         return (
           <>
           <div className="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
-          <img src={w?.product[0]?.images[0]} alt="product-image" className="w-full rounded-lg sm:w-40" />
+          <Image 
+            height={500} 
+            width={500} 
+            src={w?.product[0]?.images[0]}
+            alt="product-image"
+            className="w-full rounded-lg sm:w-40" />
           <div className="sm:ml-4 sm:flex sm:w-full sm:justify-between">
             <div className="mt-5 sm:mt-0">
               <h2 className="text-lg font-bold text-gray-900">{w?.product[0]?.name}</h2>

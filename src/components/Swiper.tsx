@@ -1,5 +1,6 @@
 import { Swiper as SwiperComponent, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
+import Image from 'next/image';
 
 
 const Swiper = () => {
@@ -22,22 +23,22 @@ const Swiper = () => {
         onSwiper={(swiper) => console.log(swiper)}
         >
         <SwiperSlide>
-            <img src="https://milkbarstore.com/cdn/shop/files/BirthdayCake_2023_0011.jpg?format=pjpg&v=1689691374&width=600" alt="Image 1" className="w-full rounded-lg object-cover" />
+            <Image width={500} height={500} src="https://milkbarstore.com/cdn/shop/files/BirthdayCake_2023_0011.jpg?format=pjpg&v=1689691374&width=600" alt="Image 1" className="w-full rounded-lg object-cover" />
         </SwiperSlide>
         <SwiperSlide>
-            <img src="https://milkbarstore.com/cdn/shop/files/BirthdayCake_2023_0011.jpg?format=pjpg&v=1689691374&width=600" alt="Image 2" className="w-full rounded-lg object-cover" />
+            <Image width={500} height={500} src="https://milkbarstore.com/cdn/shop/files/BirthdayCake_2023_0011.jpg?format=pjpg&v=1689691374&width=600" alt="Image 2" className="w-full rounded-lg object-cover" />
         </SwiperSlide>
         <SwiperSlide>
-            <img src="https://milkbarstore.com/cdn/shop/files/BirthdayCake_2023_0011.jpg?format=pjpg&v=1689691374&width=600" alt="Image 3" className="w-full rounded-lg object-cover" />
+            <Image width={500} height={500} src="https://milkbarstore.com/cdn/shop/files/BirthdayCake_2023_0011.jpg?format=pjpg&v=1689691374&width=600" alt="Image 3" className="w-full rounded-lg object-cover" />
         </SwiperSlide>
         <SwiperSlide>
-            <img src="https://milkbarstore.com/cdn/shop/files/BirthdayCake_2023_0011.jpg?format=pjpg&v=1689691374&width=600" alt="Image 3" className="w-full rounded-lg object-cover" />
+            <Image width={500} height={500} src="https://milkbarstore.com/cdn/shop/files/BirthdayCake_2023_0011.jpg?format=pjpg&v=1689691374&width=600" alt="Image 3" className="w-full rounded-lg object-cover" />
         </SwiperSlide>
         <SwiperSlide>
-            <img src="https://milkbarstore.com/cdn/shop/files/BirthdayCake_2023_0011.jpg?format=pjpg&v=1689691374&width=600" alt="Image 3" className="w-full rounded-lg object-cover" />
+            <Image width={500} height={500} src="https://milkbarstore.com/cdn/shop/files/BirthdayCake_2023_0011.jpg?format=pjpg&v=1689691374&width=600" alt="Image 3" className="w-full rounded-lg object-cover" />
         </SwiperSlide>
         <SwiperSlide>
-            <img src="https://milkbarstore.com/cdn/shop/files/BirthdayCake_2023_0011.jpg?format=pjpg&v=1689691374&width=600" alt="Image 3" className="w-full rounded-lg object-cover" />
+            <Image width={500} height={500} src="https://milkbarstore.com/cdn/shop/files/BirthdayCake_2023_0011.jpg?format=pjpg&v=1689691374&width=600" alt="Image 3" className="w-full rounded-lg object-cover" />
         </SwiperSlide>
         </SwiperComponent>
     </div>

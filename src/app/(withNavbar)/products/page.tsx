@@ -3,14 +3,16 @@
 import Card from "@/components/Card"
 
 import SearchBar from "@/components/SearchBar"
+import { BASE_URL } from "@/constants"
 import { ToggleContext } from "@/ctx/ToggleContext"
 import Product from "@/db/models/products"
+import Image from "next/image"
 
 import { useContext, useEffect, useState } from "react"
 import InfiniteScroll from 'react-infinite-scroll-component'
 
-    const Products = async():Promise<Product[]> => {
-        const response = await fetch(`https://mauproject-hellobutter.vercel.app/api/products`)        
+    const Products = async(start = 0, limit = 10):Promise<Product[]> => {
+        const response = await fetch(`${BASE_URL}/products?start=${start}&limit=${limit}`)        
         return response.json()     
     }
 
@@ -33,7 +35,7 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 
         const fetchMoreData = async () => {
             // Ambil data dari server
-            const newProducts = await Products();
+            const newProducts = await Products(products.length, 10);
             setProducts([...products, ...newProducts]);
             
             // Jika jumlah produk baru kurang dari limit, maka tidak ada lagi data
@@ -60,7 +62,7 @@ import InfiniteScroll from 'react-infinite-scroll-component'
                     dataLength={products.length}
                     next={fetchMoreData}
                     hasMore={hasMore}
-                    loader={<img className="mx-auto" src="https://i.pinimg.com/originals/45/12/4d/45124d126d0f0b6d8f5c4d635d466246.gif"/>}
+                    loader={<Image alt="loading" height={500} width={500} className="mx-auto" src="https://i.pinimg.com/originals/45/12/4d/45124d126d0f0b6d8f5c4d635d466246.gif"/>}
                     >
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {products.map(product => {

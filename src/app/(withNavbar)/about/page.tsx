@@ -1,5 +1,7 @@
 'use client'
 
+import Image from "next/image"
+
 const About = () => {
     return (
         <>
@@ -10,7 +12,12 @@ const About = () => {
               <div className="flex flex-col lg:flex-row items-center justify-between">
                 
                 <div className="lg:w-1/2">
-                  <img className="rounded-xl shadow-lg mx-auto h-auto max-w-xl" src="/img/helloCake-2.png" alt="Hello Cake image"/>
+                  <Image
+                    height={500}
+                    width={500} 
+                    className="rounded-xl shadow-lg mx-auto h-auto max-w-xl"
+                    src="/img/helloCake-2.png"
+                    alt="Hello Cake image"/>
                 </div>
           
                 
@@ -50,14 +57,24 @@ const About = () => {
                 </div>
 
                 <div className="w-full md:w-1/2 px-4">
-                    <img className="rounded-lg object-cover h-full w-full" src="/img/chef.png" alt="Team working"/>
+                    <Image 
+                        height={500}
+                        width={500}   
+                        className="rounded-lg object-cover h-full w-full"
+                        src="/img/chef.png" 
+                        alt="Team working"/>
                 </div>
             </div>
     
             <div className="flex flex-wrap -mx-4">
 
                 <div className="w-full md:w-1/2 px-4 mb-4 md:mb-0 order-2 md:order-1">
-                    <img className="rounded-lg object-cover h-full w-full" src="/img/programmer.png"/>
+                    <Image  
+                        height={500}
+                        width={500} 
+                        alt=""
+                        className="rounded-lg object-cover h-full w-full"
+                        src="/img/programmer.png"/>
                 </div>
 
                 <div className="w-full md:w-1/2 px-4 order-1 md:order-2">

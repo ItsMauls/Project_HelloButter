@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation"
 import { useState } from "react"
 import { signIn } from 'next-auth/react'
 import { useRouter } from "next/navigation"
+import { BASE_URL } from "@/constants"
 
 const createUser = async(
     name : string,
@@ -11,7 +12,7 @@ const createUser = async(
     username? : string,
     password? : string
     ) => {
-    const response = await fetch('https://mauproject-hellobutter.vercel.app/api/auth/register', {
+    const response = await fetch(`${BASE_URL}/auth/register`, {
         method : 'POST',
         headers : {
             'Content-Type' : 'application/json'
