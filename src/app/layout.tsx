@@ -23,7 +23,6 @@ export default function RootLayout({
           <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
           <link rel="icon" href="/img/helloCake-2.png" />
           {children}
-        
         </body>
       </html>
   )

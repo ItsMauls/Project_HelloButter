@@ -3,7 +3,8 @@ import { signOut, useSession } from "next-auth/react"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { ReactNode } from "react"
+import { ReactNode, useRef, useState } from "react"
+import AuthForm from "./AuthForm"
 
 type ChildrenType = {
     toggleSearch : ReactNode
@@ -11,13 +12,24 @@ type ChildrenType = {
 
 const NavBar = ({toggleSearch} : any) => {
   const pathName = usePathname()
+  const modalRefs = useRef<HTMLDialogElement>(null)
+  const [statusHide, setStatusHide] = useState(true)
+  const [isLogin, setIsLogin] = useState<boolean>(true)
   const {data : session, status} = useSession()
   const isLoggedIn = status === 'authenticated'
   
   const logoutHandler = () => {
     signOut()
-
   }
+  const closeDialog = () => {
+    modalRefs.current && modalRefs.current.close()
+    setStatusHide(true)
+  }
+  const openDialog = () => {
+    setStatusHide(false)
+    modalRefs.current && modalRefs.current.showModal()
+  }
+
   const inProductsPage =(pathName === '/products')
   
     return (
@@ -35,7 +47,7 @@ const NavBar = ({toggleSearch} : any) => {
     </Link>
     <div className="flex md:order-2">
         {isLoggedIn && <Link href={'/wishlist'}><Image width={500} height={500} src="/img/wishlist.png" className="w-10" alt="" /></Link>}
-        {!isLoggedIn && <Link href={'/login'}><Image width={500} height={500} src="/img/account.png" className="w-10 mx-3" alt="" /></Link>}
+        {!isLoggedIn && <button onClick={openDialog}><Image width={500} height={500} src="/img/account.png" className="w-10 mx-3" alt="" /></button>}
         {inProductsPage && <button onClick={toggleSearch}><Image width={500} height={500} src="/img/search.png" className="w-10" alt="" /></button>}
         {isLoggedIn && <Image width={500} height={500} src="/img/logout.png" onClick={logoutHandler} className="w-10 mx-3" alt="" />}
         
@@ -56,6 +68,7 @@ const NavBar = ({toggleSearch} : any) => {
     </div>
   </div>
 </nav>
+<AuthForm closeDialog={closeDialog} isLogin={isLogin} setIsLogin={setIsLogin} statusHide={statusHide} ref={modalRefs}/>
   {/* <div className=""> */}
   {/* {children} */}
   {/* </div> */}
