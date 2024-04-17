@@ -4,6 +4,7 @@ import { ObjectId } from "mongodb"
 import Product from "@/db/models/products"
 import { BASE_URL } from "@/constants"
 import Image from "next/image"
+import { useSession } from "next-auth/react"
 
 
 const getWishlist = async() => {
@@ -21,6 +22,8 @@ type WishListItem = {
 
 const Wishlist = () => {
   const [wishlist, setWishlist] = useState<WishListItem[]>([]) 
+  const { data: session } = useSession()
+  const shipping = 15000
 
   const deleteWishlist = async(productId : string) => {
     
@@ -40,6 +43,43 @@ const Wishlist = () => {
     }
     asyncFn()
   }, [])
+  
+  const subTotal = wishlist.map((item) => {
+    console.log(item);
+    
+    return item.product.reduce((productAccumulator, p) => productAccumulator * p.price, 1)
+  }).reduce((total, itemSubTotal) => total + itemSubTotal, 0)
+
+  const handleOrderNow = async (  ) => {    
+              
+    const payload = {    
+            amount : subTotal,
+            "payerEmail" : session?.user?.email,
+            description : 'tes',
+            
+    };
+
+
+  try {
+      // const res = await fetch(`${api.payment.create}`, postRequest(payload, true))
+      // const paymentData = await res.json();
+      
+      // if (subTotal !== 0 && paymentData.res.invoiceUrl) {
+      //     // Redirect user to Xendit payment page
+      //     window.location.href = paymentData.res.invoiceUrl;
+      // } else {
+      //     // Handle error
+      //     console.error(paymentData.error);
+      // }
+      
+  } catch (error) {
+      throw error
+  } finally {
+      console.log('finally');
+      // localStorage.setItem('selectedCart', JSON.stringify([]));
+  }
+  
+  }
   
   
     return (
@@ -85,26 +125,26 @@ const Wishlist = () => {
         {/* ----- */}
       </div>
       
-      {/* <div className="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
+       <div className="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
         <div className="mb-2 flex justify-between">
           <p className="text-gray-700">Subtotal</p>
-          <p className="text-gray-700">$129.99</p>
+          <p className="text-gray-700">{priceFormat(subTotal)}</p>
         </div>
         <div className="flex justify-between">
           <p className="text-gray-700">Shipping</p>
-          <p className="text-gray-700">$4.99</p>
+          <p className="text-gray-700">{priceFormat(shipping)}</p>
         </div>
         <hr className="my-4" />
         <div className="flex justify-between">
           <p className="text-lg font-bold">Total</p>
           <div className="">
-            <p className="mb-1 text-lg font-bold">$134.98 USD</p>
+            <p className="mb-1 text-lg font-bold">{priceFormat(subTotal + shipping)}</p>
             <p className="text-sm text-gray-700">including VAT</p>
             {/* <AddToWishlistButton /> */}
-          {/* </div> */}
-        {/* </div> */}
-        {/* <button className="mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-600">Check out</button> */}
-      {/* </div>   */}
+          </div>
+        </div>
+        <button className="mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-600">Check out</button>
+      </div>  
     </div>
   </div>
 

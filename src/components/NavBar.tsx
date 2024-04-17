@@ -2,7 +2,7 @@
 import { signOut, useSession } from "next-auth/react"
 import Image from "next/image"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { ReactNode, useRef, useState } from "react"
 import AuthForm from "./AuthForm"
 import { CiHeart, CiLogout, CiSearch, CiUser } from "react-icons/ci"
@@ -13,6 +13,7 @@ type ChildrenType = {
 
 const NavBar = ({toggleSearch} : any) => {
   const pathName = usePathname()
+  const router = useRouter()
   const modalRefs = useRef<HTMLDialogElement>(null)
   const [statusHide, setStatusHide] = useState(true)
   const [isLogin, setIsLogin] = useState<boolean>(true)
@@ -35,44 +36,96 @@ const NavBar = ({toggleSearch} : any) => {
   
     return (
         <>
-        <nav className=" border-b-2  border-gray-200 px-2 sm:px-4 py-2.5">
-  <div className="container flex flex-wrap justify-between items-center mx-auto">
-    <Link href="/" className="flex items-center">
-        <Image 
-          height={50}
-          width={60}  
-          src="/img/logo.png" 
-          className="mr-3 h-12 sm:h-14" 
-          alt="Logo"/>
-        <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-pink-500">Hallo Butter</span>
-    </Link>
-    <div className="flex md:order-2 items-center">
-        {isLoggedIn && <Link href={'/wishlist'}> <CiHeart className="text-3xl md:mx-3"/> </Link>}
-        {!isLoggedIn && <button onClick={openDialog}><CiUser className="text-3xl md:mx-3 mx-2" /></button>}
-        {inProductsPage && <button onClick={toggleSearch}><CiSearch className="text-3xl"/></button>}
-        {isLoggedIn && <button onClick={logoutHandler} className="w-10 mx-3" > <CiLogout className="text-3xl"/> </button>}
+ <nav className="bg-white sticky z-50 border-b top-0 bg-opacity-90 border-gray-300 drop-shadow-sm">
+    <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      {/* <!-- Top Section for Logo, Search Icon, Account Icon, and Cart Icon --> */}
+      <div className="flex justify-end py-3">
         
-        <button data-collapse-toggle="mobile-menu-2" type="button" className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-2" aria-expanded="false">
-            <span className="sr-only">Open main menu</span>
-            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M3 4.5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm1 5a1 1 0 100 2h12a1 1 0 100-2H4zm1 5a1 1 0 100 2h12a1 1 0 100-2H5z" clipRule="evenodd"></path></svg>
-        </button>
+        {/* <!-- Right side - Search Icon, Account Icon, and Cart Icon --> */}
+        <div className="flex items-center space-x-4">
+          {/* <!-- Search Icon --> */}
+          {inProductsPage && 
+            <button onClick={toggleSearch} className="text-black">
+              <CiSearch className="text-2xl"/>
+            </button>
+          }
+          
+          {/* <!-- Account Icon --> */}
+          {!isLoggedIn && 
+            <button 
+              onClick={openDialog} 
+              className="text-black">
+              <CiUser className="text-2xl"/>
+            </button>
+          } 
+
+          {/* <!-- Wishlist Icon --> */}
+          {isLoggedIn &&
+            <button 
+              onClick={() => router.push('/wishlist')}
+              className="text-black">
+              <CiHeart className="text-2xl"/>
+            </button>
+          }
+          {/* Logout Icon */}
+          {isLoggedIn &&
+            <button
+              onClick={logoutHandler} 
+              className="text-black">
+              <CiLogout className="text-2xl"/>
+            </button>
+          }
+        </div>
+      </div>
+
+      {/* <!-- Bottom Section for Navigation Links and Logo --> */}
+      <div className="flex justify-between items-center py-3">
+
+        {/* <!-- Left side - Menu Icon & Location Icon --> */}
+        <div className="flex items-center space-x-4">
+          {/* <!-- Menu Icon --> */}
+          <button className="text-black">
+            {/* <!-- Placeholder for Menu Icon SVG --> */}
+          </button>
+          {/* <!-- Location Icon --> */}
+          <button className="text-black">
+            {/* <!-- Placeholder for Location Icon SVG --> */}
+          </button>
+        </div>
+        
+        {/* <!-- Center - Navigation Links --> */}
+        <div className="flex-grow flex justify-center items-center space-x-8">
+          <Link href="/products" className="font-medium text-black hover:text-gray-800 text-md">PRODUCTS</Link>
+          <Link href="#" className="font-medium text-black hover:text-gray-800 text-md">TENTANG KAMI</Link>
+          <Link href="#" className="font-medium text-black hover:text-gray-800 text-md">HUBUNGI KAMI</Link>
+          {/* <Link href="#" className="font-medium text-black hover:text-gray-800 text-md">HALLO BUTTER</Link> */}
+          {/* <Link href="#" className="font-medium text-black hover:text-gray-800 text-md">GROCERY</Link>`
+          <Link href="#" className="font-medium text-black hover:text-gray-800 text-md">MORE MILK BAR</Link>` */}
+        </div>
+
+      </div>
+
+      {/* <!-- Logo centered above navigation links --> */}
+      <div className="absolute left-1/2 transform -translate-x-1/2 top-0 pb-3">
+        {/* <!-- Logo --> */}
+        <Image 
+          width={500} 
+          height={500} 
+          className="h-14 w-full sm:h-9" 
+          src="/img/logo.png" 
+          alt="Hallo Butter Logo" />
+      </div>
     </div>
-    <div className="hidden justify-between items-center w-full md:flex md:w-auto md:order-1" id="mobile-menu-2">
-      <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
-        <li>
-          <Link href="/products" className="block py-2 pr-4 pl-3 text-black text-xl rounded md:bg-transparent md:p-0" aria-current="page">Products</Link>
-        </li>
-        <li>
-          <Link href="/about" className="block py-2 pr-4 pl-3 text-black text-xl rounded md:bg-transparent md:p-0">About Us</Link>
-        </li>
-      </ul>
-    </div>
-  </div>
 </nav>
-<AuthForm closeDialog={closeDialog} isLogin={isLogin} setIsLogin={setIsLogin} statusHide={statusHide} ref={modalRefs}/>
-  {/* <div className=""> */}
-  {/* {children} */}
-  {/* </div> */}
+
+<AuthForm 
+  closeDialog={closeDialog} 
+  isLogin={isLogin} 
+  setIsLogin={setIsLogin} 
+  statusHide={statusHide} 
+  ref={modalRefs}
+  />
         </>
     )
 }
