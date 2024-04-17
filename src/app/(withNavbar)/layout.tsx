@@ -1,5 +1,6 @@
 'use client'
 
+import { Footer } from "@/components/Footer";
 import NavBar from "@/components/NavBar";
 import ProtectingRoute from "@/components/ProtectingRoute";
 import { ToggleContext } from "@/ctx/ToggleContext";
@@ -27,6 +28,7 @@ export default function NavbarLayout({children} : {children : ReactNode}) {
             </ToggleContext.Provider>
         </ProtectingRoute>
         </SessionProvider>
+        <Footer />
         </>
     )
 }

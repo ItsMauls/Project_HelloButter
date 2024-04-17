@@ -12,7 +12,7 @@ const Swiper = () => {
     <div className='p-8'>
         <div className='text-center my-8 mt-14'>
             <h1 className='font-bold text-4xl'>SEASONS EATING</h1>
-            <h1 className='mt-4'>Stock your dessert table with Milk Bar and send treats to your whole gifting list - we’re delivering big on holiday cheer.</h1>
+            <h1 className='mt-4'>Stock your dessert table with Hallo Butter and send treats to your whole gifting list - we’re delivering big on holiday cheer.</h1>
         </div>
         <SwiperComponent
         className='swiper-slide'
