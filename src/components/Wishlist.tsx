@@ -5,6 +5,7 @@ import Product from "@/db/models/products"
 import { BASE_URL } from "@/constants"
 import Image from "next/image"
 import { useSession } from "next-auth/react"
+import { postRequest } from "@/constants/httpRequest"
 
 
 const getWishlist = async() => {
@@ -45,8 +46,6 @@ const Wishlist = () => {
   }, [])
   
   const subTotal = wishlist.map((item) => {
-    console.log(item);
-    
     return item.product.reduce((productAccumulator, p) => productAccumulator * p.price, 1)
   }).reduce((total, itemSubTotal) => total + itemSubTotal, 0)
 
@@ -58,19 +57,21 @@ const Wishlist = () => {
             description : 'tes',
             
     };
-
+    console.log(payload, 'tes');
+    
 
   try {
-      // const res = await fetch(`${api.payment.create}`, postRequest(payload, true))
-      // const paymentData = await res.json();
+      const res = await fetch(`${BASE_URL}/create-payment`, postRequest(payload))
+      const paymentData = await res.json();
+      console.log(paymentData.res);
       
-      // if (subTotal !== 0 && paymentData.res.invoiceUrl) {
-      //     // Redirect user to Xendit payment page
-      //     window.location.href = paymentData.res.invoiceUrl;
-      // } else {
-      //     // Handle error
-      //     console.error(paymentData.error);
-      // }
+      if (subTotal !== 0 && paymentData.invoiceUrl) {
+          // Redirect user to Xendit payment page
+          window.location.href = paymentData.invoiceUrl;
+      } else {
+          // Handle error
+          console.error(paymentData.error);
+      }
       
   } catch (error) {
       throw error
@@ -143,7 +144,9 @@ const Wishlist = () => {
             {/* <AddToWishlistButton /> */}
           </div>
         </div>
-        <button className="mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-600">Check out</button>
+        <button 
+          onClick={handleOrderNow}
+          className="mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-600">Check out</button>
       </div>  
     </div>
   </div>
