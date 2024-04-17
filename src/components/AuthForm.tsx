@@ -1,6 +1,5 @@
 'use client'
 
-import { usePathname } from "next/navigation"
 import { forwardRef, useState } from "react"
 import { signIn } from 'next-auth/react'
 import { useRouter } from "next/navigation"
@@ -101,12 +100,14 @@ const AuthForm = forwardRef<HTMLDialogElement, Props>(({setIsLogin, isLogin, clo
                 {isLoginPage &&
                 <h2 className="text-center">Create an account to get access to order history, referral credit, gift reminders, and more!</h2>} 
                 {isLoginPage &&
-                <button onClick={() => setIsLogin(false)} className="bg-white border border-black w-full my-4 rounded-lg py-2 font-bold hover:bg-black hover:text-white duration-500">Create Account</button> }
+                <button onClick={toRegister} className="bg-white border border-black w-full my-4 rounded-lg py-2 font-bold hover:bg-black hover:text-white duration-500">Create Account</button> }
             </div>
         </div>
     </dialog>
     </>
     )
 })
+
+AuthForm.displayName = 'AuthForm';
 
 export default AuthForm
