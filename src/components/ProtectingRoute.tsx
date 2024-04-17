@@ -7,7 +7,7 @@ export default function ProtectingRoute ({children} : {children : React.ReactNod
     const pathname = usePathname()
     
     if(status !== 'unauthenticated' && (pathname === '/login' || pathname === '/register')) return redirect('/') 
-    if((status !== 'authenticated' && status !== 'loading') && pathname === '/wishlist') return redirect('/login') 
+    if((status !== 'authenticated' && status !== 'loading') && pathname === '/wishlist') return redirect('/') 
     
 
     return (

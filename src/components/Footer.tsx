@@ -7,8 +7,8 @@ export const Footer = () => {
         <div className="max-w-7xl mx-auto px-8 py-12">
           <div className="flex flex-col lg:flex-row justify-between">
             <div className="flex flex-col justify-between mb-6 lg:mb-0 lg:w-1/2">
-              <h2 className="text-2xl font-bold mb-3">INVITE Hallo Butter TO YOUR B'DAY PARTY</h2>
-              <p className="mb-3">Tell us your birthday + receive a special treat with your birthday order :)</p>
+              <h2 className="text-2xl font-bold mb-3">Undang Hallo Butter Ke PESTA ULANG TAHUN KAMU!</h2>
+              <p className="mb-3">Beritahu Ulang Tahun Kamu + Dapatkan Special Treat Untuk Pesanan Ulang Tahun Kamu :)</p>
               <form className="flex flex-col sm:flex-row items-center gap-3 mb-4">
                 <input type="email" placeholder="Your Email*" className="w-full flex-1 md:w-auto p-2 bg-transparent border-b-white border-b-2 text-white" required/>
                 <input type="text" placeholder="Your Birthday MM/DD" className="w-full md:w-auto flex-1 p-2 bg-transparent border-white border-b-2 text-white" required/>
@@ -30,14 +30,14 @@ export const Footer = () => {
                 <h3 className="text-lg font-semibold mb-2">LEARN</h3>
                 <nav>
                   <ul className="space-y-1">
-                    <li><Link href="#" className="hover:text-gray-400">About Hallo Butter</Link></li>
+                    <li><Link href="#" className="hover:text-gray-400">Tentang Hallo Butter</Link></li>
                     <li><Link href="#" className="hover:text-gray-400">FAQ</Link></li>
-                    <li><Link href="#" className="hover:text-gray-400">About Us</Link></li>
+                    <li><Link href="#" className="hover:text-gray-400">Kontak</Link></li>
                   </ul>
                 </nav>
               </div>
               <div>
-                <h3 className="text-lg font-semibold mb-2">Available On</h3>
+                <h3 className="text-lg font-semibold mb-2">TERSEDIA DI</h3>
                 <nav>
                   <ul className="space-y-1">
                     <li><Link href="#" className="hover:text-gray-400">Tokopedia</Link></li>

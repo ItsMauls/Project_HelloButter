@@ -1,14 +1,35 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 import NextAuth, { AuthOptions, User } from "next-auth";
+import GoogleProvider from "next-auth/providers/google"
 import { connectToDatabase } from "../../../src/db/config/db";
 import { comparePassword } from "../../../src/helpers/bcrypt";
-import {z} from 'zod'
+import { z } from 'zod'
+
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID as string
+const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET as string
 
 export const authOptions : AuthOptions = {
     secret : process.env.JWT_SECRET,
     session : {
-        strategy : 'jwt'
+        strategy : 'jwt',
     },
+    callbacks: {
+        async jwt({ token, user }) {
+          // jika user ditemukan dan memiliki property id, kita asumsikan bahwa autentikasi berhasil
+          if (user?.id) {
+            token.id = user.id; // Anda bisa menyimpan id pengguna dalam token
+          }
+          return token;
+        },
+        async session( { session, token }  :{session : any, token : any}) {
+          // Menambahkan properti id ke sesi pengguna
+          if (token.id) {
+            session.user.id = token.id;
+          }
+          // Kembalikan sesi yang sudah termasuk id pengguna
+          return session;
+        },
+      },
     providers : [
         CredentialsProvider({
             name: "Credentials",
@@ -52,6 +73,10 @@ export const authOptions : AuthOptions = {
                     throw error
                 }
             },
+        }),
+        GoogleProvider({
+            clientId: GOOGLE_CLIENT_ID,
+            clientSecret: GOOGLE_CLIENT_SECRET
         })
     ]
 }

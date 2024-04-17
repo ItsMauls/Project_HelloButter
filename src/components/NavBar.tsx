@@ -5,6 +5,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { ReactNode, useRef, useState } from "react"
 import AuthForm from "./AuthForm"
+import { CiHeart, CiLogout, CiSearch, CiUser } from "react-icons/ci"
 
 type ChildrenType = {
     toggleSearch : ReactNode
@@ -45,11 +46,11 @@ const NavBar = ({toggleSearch} : any) => {
           alt="Logo"/>
         <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-pink-500">Hallo Butter</span>
     </Link>
-    <div className="flex md:order-2">
-        {isLoggedIn && <Link href={'/wishlist'}><Image width={500} height={500} src="/img/wishlist.png" className="w-10" alt="" /></Link>}
-        {!isLoggedIn && <button onClick={openDialog}><Image width={500} height={500} src="/img/account.png" className="w-10 mx-3" alt="" /></button>}
-        {inProductsPage && <button onClick={toggleSearch}><Image width={500} height={500} src="/img/search.png" className="w-10" alt="" /></button>}
-        {isLoggedIn && <Image width={500} height={500} src="/img/logout.png" onClick={logoutHandler} className="w-10 mx-3" alt="" />}
+    <div className="flex md:order-2 items-center">
+        {isLoggedIn && <Link href={'/wishlist'}> <CiHeart className="text-3xl md:mx-3"/> </Link>}
+        {!isLoggedIn && <button onClick={openDialog}><CiUser className="text-3xl md:mx-3 mx-2" /></button>}
+        {inProductsPage && <button onClick={toggleSearch}><CiSearch className="text-3xl"/></button>}
+        {isLoggedIn && <button onClick={logoutHandler} className="w-10 mx-3" > <CiLogout className="text-3xl"/> </button>}
         
         <button data-collapse-toggle="mobile-menu-2" type="button" className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-2" aria-expanded="false">
             <span className="sr-only">Open main menu</span>

@@ -35,7 +35,7 @@ export const getWishlist = async() => {
             }
           ]
 
-        const data = await Wishlists.aggregate(pipeline).match({userId : user._id}).toArray()
+        const data = await Wishlists.aggregate(pipeline).match({userId : user ? user._id : session.user.id}).toArray() 
         return data
     } catch (error) {
         throw error
@@ -44,33 +44,39 @@ export const getWishlist = async() => {
 
 export const addWishlist = async(req:NextRequest) => {
     try {
+        console.log('tes wishlsit');
+        
         const url = new URL(req.url)
         const db = await connectToDatabase()
         const Wishlist = db.collection('Wishlists')
         const Users = db.collection('Users')
 
         const session : Session | any = await getServerSession(authOptions)
+        console.log(session, 'sesi');
         
-        const user: WithId<Document> | any = await Users.findOne({email : session.user.email})
+        const user: WithId<Document> | any = await Users.findOne({email : session.user.email}) 
         
         const pathname = url.pathname
         const segments = pathname.split('/')
         
         const productId = new ObjectId(segments[4]) 
-  
+        
         const selectedProduct = {
-            userId : user._id,
+            userId : user ? user._id : session.user.id,
             productId
         }
         const duplicateWishlist = await Wishlist.findOne({
-            userId : user._id,
+            userId : user ? user._id : session.user.id,
             productId
         })
+        console.log(duplicateWishlist, 'duplkat');
+        
         if(duplicateWishlist) {
             return
         }
         await Wishlist.insertOne(selectedProduct)
-    } catch (error) {
+    } catch (error: any) {
+        console.log(error.message)
         throw error
     }
 }

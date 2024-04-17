@@ -4,6 +4,7 @@ import { forwardRef, useState } from "react"
 import { signIn } from 'next-auth/react'
 import { useRouter } from "next/navigation"
 import { BASE_URL } from "@/constants"
+import { GoogleButton } from "./GoogleButton"
 
 interface Props {
     isLogin? : boolean
@@ -61,7 +62,7 @@ const AuthForm = forwardRef<HTMLDialogElement, Props>(({setIsLogin, isLogin, clo
         const {name, username, email, password} = input
         if(isRegisterPage) {
             await createUser(name, email, username, password)
-            router.push('/login')
+            router.push('/')
         } else {
             const result = await signIn('credentials', {
                 redirect : false,
@@ -94,6 +95,9 @@ const AuthForm = forwardRef<HTMLDialogElement, Props>(({setIsLogin, isLogin, clo
                 <button className="mx-auto bg-black text-white w-full md:w-2/3 rounded-lg py-2 my-3 flex justify-center items-center duration-500 ease-in hover:bg-pink-500">Log in</button> 
                 : <button className="mx-auto bg-black text-white w-full md:w-2/3 rounded-lg py-2 my-3 flex justify-center items-center duration-500 ease-in hover:bg-pink-500">Register</button>}
             </form>
+            <div className="flex justify-center">
+                <GoogleButton />    
+            </div>
             <div>
                 {isLoginPage &&
                 <h1 className="text-center font-semibold border-t-2 border-gray-200 text-xl mt-3">SIGN UP</h1>}
