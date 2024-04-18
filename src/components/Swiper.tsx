@@ -19,7 +19,7 @@ const Swiper = () => {
         modules={[Autoplay]}
         loop={true}
         autoplay={{
-            delay:3000
+            delay:1500
         }}
         breakpoints={{
             320: {
@@ -33,7 +33,7 @@ const Swiper = () => {
               },
               // when window width is >= 640px
               640: {
-                slidesPerView: 3,
+                slidesPerView: 4,
                 spaceBetween: 40
               }
         }}
