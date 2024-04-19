@@ -41,3 +41,29 @@
   animation: marquee 55s linear infinite;
 }
 
+.hover-underline-animation {
+  display: block; 
+  position: relative;
+}
+
+
+.hover-underline-animation::after {
+  content: '';
+  position: absolute;
+  width: 55%;
+  height: 2px; 
+  bottom: 0;
+  left: 0;
+  background-color: black;
+  transition: transform 0.4s cubic-bezier(0.85, 0, 0.15, 1);
+  transform: scaleX(0);
+  transform-origin: bottom right;
+}
+
+
+.hover-underline-animation:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+

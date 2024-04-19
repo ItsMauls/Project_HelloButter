@@ -1,3 +1,6 @@
+import Link from "next/link";
+import { IoMdClose } from "react-icons/io";
+
 export const SideBar = ({setSidebarOpen, isSidebarOpen} : {setSidebarOpen : any, isSidebarOpen : any}) => {
     return (
         <>
@@ -16,13 +19,13 @@ export const SideBar = ({setSidebarOpen, isSidebarOpen} : {setSidebarOpen : any,
         >
           {/* Isi dari sidebar */}
           <button 
-            className="float-right"
-            onClick={() => setSidebarOpen(false)}>X</button>
+            className="float-right m-4"
+            onClick={() => setSidebarOpen(false)}><IoMdClose className="text-lg"/></button>
           {/* Content */}
-          <ul className="p-4">
-            <li>Products</li>
-            <li className="my-3">Tentang Kami</li>
-            <li>Hubungi Kami</li>
+          <ul className="p-4 mt-14 font-semibold">
+            <Link href={'/products'}><li className="hover-underline-animation">Products</li></Link>
+            <li className="my-4 hover-underline-animation">Tentang Kami</li>
+            <li className="hover-underline-animation">Hubungi Kami</li>
           </ul>
         </div>
       </>

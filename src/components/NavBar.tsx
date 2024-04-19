@@ -5,9 +5,9 @@ import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { ReactNode, useRef, useState } from "react"
 import AuthForm from "./AuthForm"
-import { CiBoxList, CiHeart, CiLogout, CiSearch, CiUser } from "react-icons/ci"
-import { FaList } from "react-icons/fa"
+import { CiBoxList, CiHeart, CiLogout, CiSearch, CiShoppingCart, CiUser } from "react-icons/ci"
 import { SideBar } from "./SideBar"
+import { CartSideBar } from "./CartSideBar"
 
 type ChildrenType = {
     toggleSearch : ReactNode
@@ -19,10 +19,11 @@ const NavBar = ({toggleSearch} : any) => {
   const modalRefs = useRef<HTMLDialogElement>(null)
   const pathName = usePathname()
   const router = useRouter()
-  const {status} = useSession()
+  const { status } = useSession()
   const isLoggedIn = status === 'authenticated'
 
   const [isSidebarOpen, setSidebarOpen] = useState<any>(false);
+  const [isCartSidebarOpen, setCartSidebarOpen] = useState<any>(false);
   
   const logoutHandler = () => {
     signOut()
@@ -56,6 +57,7 @@ const NavBar = ({toggleSearch} : any) => {
       {/* Logo (selalu terlihat) */}
       <div className="sm:flex sm:grow justify-center overflow-hidden" style={{ height: '64px' }}> {/* Setting a fixed height */}
         <Image 
+          onClick={() => router.push('/')}
               src="/img/logo.png" 
               alt="Hallo Butter Logo"
               width={500} 
@@ -80,8 +82,15 @@ const NavBar = ({toggleSearch} : any) => {
           </button>
         }
         {isLoggedIn && <>
-          <button onClick={() => router.push('/wishlist')} className=" text-black">
+          <button  
+            onClick={() => router.push('/wishlist')}
+            className=" text-black">
             <CiHeart className="text-2xl"/>
+          </button>
+          <button  
+            onClick={() => setCartSidebarOpen(true)}
+            className=" text-black">
+            <CiShoppingCart className="text-2xl"/>
           </button>
           <button onClick={logoutHandler} className=" text-black">
             <CiLogout className="text-2xl"/>
@@ -111,6 +120,10 @@ const NavBar = ({toggleSearch} : any) => {
   <SideBar 
     setSidebarOpen={setSidebarOpen}
     isSidebarOpen={isSidebarOpen}
+    />
+  <CartSideBar
+    setCartSideBarOpen={setCartSidebarOpen}
+    isCartSideBarOpen={isCartSidebarOpen}
     />
         </>
     )
